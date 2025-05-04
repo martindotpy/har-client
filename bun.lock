@@ -5,6 +5,8 @@
       "name": "client",
       "dependencies": {
         "@astrojs/react": "4.2.7",
+        "@fontsource-variable/inter": "5.2.5",
+        "@fontsource/cascadia-mono": "5.2.1",
         "@tailwindcss/typography": "0.5.16",
         "@tailwindcss/vite": "4.1.5",
         "@types/react": "19.1.2",
@@ -192,6 +194,10 @@
     "@expressive-code/plugin-shiki": ["@expressive-code/plugin-shiki@0.41.2", "", { "dependencies": { "@expressive-code/core": "^0.41.2", "shiki": "^3.2.2" } }, "sha512-xD4zwqAkDccXqye+235BH5bN038jYiSMLfUrCOmMlzxPDGWdxJDk5z4uUB/aLfivEF2tXyO2zyaarL3Oqht0fQ=="],
 
     "@expressive-code/plugin-text-markers": ["@expressive-code/plugin-text-markers@0.41.2", "", { "dependencies": { "@expressive-code/core": "^0.41.2" } }, "sha512-JFWBz2qYxxJOJkkWf96LpeolbnOqJY95TvwYc0hXIHf9oSWV0h0SY268w/5N3EtQaD9KktzDE+VIVwb9jdb3nw=="],
+
+    "@fontsource-variable/inter": ["@fontsource-variable/inter@5.2.5", "", {}, "sha512-TrWffUAFOnT8zroE9YmGybagoOgM/HjRqMQ8k9R0vVgXlnUh/vnpbGPAS/Caz1KIlOPnPGh6fvJbb7DHbFCncA=="],
+
+    "@fontsource/cascadia-mono": ["@fontsource/cascadia-mono@5.2.1", "", {}, "sha512-0nDPLaVY3vQzkTZWs3BZqtIOBgwggyAa5KFmuMH7rS7aWAJ4WdasKhK/12CZ/4QAe7fnaqFtClQ2k7Unz3sqeA=="],
 
     "@humanfs/core": ["@humanfs/core@0.19.1", "", {}, "sha512-5DyQ4+1JEUzejeK1JGICcideyfUbGixgS9jNgex5nqkW+cY7WZhxBigmieN5Qnw9ZosSNVC9KQKyb+GUaGyKUA=="],
 

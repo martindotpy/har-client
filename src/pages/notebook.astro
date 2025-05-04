@@ -25,7 +25,7 @@ const contents = tokens.map((token) =>
         typeof content === "string" ? (
           <Fragment set:html={content} />
         ) : (
-          <Code code={content.text} lang={content.lang} />
+          <Code class="font-mono" code={content.text} lang={content.lang} />
         ),
       )
     }
