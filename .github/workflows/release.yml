@@ -1,0 +1,50 @@
+name: Release the api and build notebook
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+jobs:
+  deploy_release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up cloudflared
+        uses: AnimMouse/setup-cloudflared@v2
+
+      - name: Install SSH key
+        uses: shimataro/ssh-key-action@v2
+        with:
+          key: ${{ secrets.SSH_KEY }}
+          name: martindotpy.dev
+          known_hosts: ${{ secrets.SSH_KNOWN_HOSTS }}
+          config: |
+            Host ${{ secrets.SSH_HOST }}
+              User ${{ secrets.SSH_USERNAME }}
+              Port ${{ secrets.SSH_PORT }}
+              IdentityFile ~/.ssh/martindotpy.dev
+              ProxyCommand cloudflared access ssh --hostname %h
+
+      # Deploy
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+
+      - name: Build the project
+        run: bun run build
+
+      - name: Copy the code to the server
+        run: |
+          rsync -avz --delete \
+            -e "ssh" \
+            dist ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }}:${{ secrets.FOLDER }}
