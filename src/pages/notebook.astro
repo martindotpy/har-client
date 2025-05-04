@@ -2,8 +2,8 @@
 import Section from "@/components/organisms/Section.astro";
 import { apiUrl } from "@/config";
 import Layout from "@/layout/Layout.astro";
+import marked from "@/lib/marked";
 import { Code } from "astro-expressive-code/components";
-import { marked } from "marked";
 
 // Data
 const response = await fetch(`${apiUrl}/api/notebook/har_clustering.md`);
