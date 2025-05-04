@@ -25,9 +25,35 @@ const contents = tokens.map((token) =>
         typeof content === "string" ? (
           <Fragment set:html={content} />
         ) : (
-          <Code class="font-mono" code={content.text} lang={content.lang} />
+          <Code code={content.text} lang={content.lang} />
         ),
       )
     }
   </Section>
 </Layout>
+
+<style is:inline>
+  @references "@styles";
+
+  div:has(table.dataframe) {
+    overflow-x: auto;
+  }
+
+  div:has(table.dataframe)::-webkit-scrollbar {
+    height: 8px;
+  }
+
+  div:has(table.dataframe)::-webkit-scrollbar-track {
+    background: var(--color-slate-900);
+    border-radius: 4px;
+  }
+
+  div:has(table.dataframe)::-webkit-scrollbar-thumb {
+    background: var(--color-slate-800);
+    border-radius: 4px;
+  }
+
+  div:has(table.dataframe)::-webkit-scrollbar-thumb:hover {
+    background: var(--color-slate-600);
+  }
+</style>
