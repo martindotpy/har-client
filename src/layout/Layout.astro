@@ -1,0 +1,68 @@
+---
+import GlobalStyles from "@/components/atoms/GlobalStyles.astro";
+import Footer from "@/components/organisms/Footer.astro";
+import Header from "@/components/organisms/Header.astro";
+import { site } from "@/config";
+import { ClientRouter } from "astro:transitions";
+
+// Context
+interface Props {
+  description: string;
+  title?: string;
+}
+
+const { title, description } = Astro.props;
+const fullTitle = `Har Clustering${title ? `: ${title}` : ""}`;
+---
+
+<!doctype html>
+<html lang="es" style="color-scheme: dark;">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>{fullTitle}</title>
+
+    <link rel="shortcut icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="robots" content="index, follow" />
+
+    <meta name="author" content="Andrea, Ángel y Martin" />
+    <meta name="keywords" content="har" />
+    <meta name="description" content={description} />
+
+    <meta property="og:site_name" content={fullTitle} />
+    <meta property="og:url" content={site} />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:locale" content="es" />
+    <meta property="og:description" content={description} />
+    <slot name="og:image">
+      <meta property="og:image" content="/img/logo-open-graph.jpg" />
+    </slot>
+
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:domain" content={site.replace("https://", "")} />
+    <meta property="twitter:url" content={site} />
+    <meta property="twitter:title" content={fullTitle} />
+    <meta property="twitter:description" content={description} />
+    <slot name="twitter:image">
+      <meta property="twitter:image" content="/img/logo-open-graph.jpg" />
+    </slot>
+
+    <slot name="head" />
+
+    <GlobalStyles />
+
+    <ClientRouter />
+  </head>
+  <body class="main-container overflow-y-scroll">
+    <Header />
+
+    <main class="min-h-main-h mt-header-h overflow-x-hidden">
+      <slot />
+    </main>
+
+    <Footer />
+  </body>
+</html>

@@ -40,11 +40,16 @@ jobs:
       - name: Install dependencies
         run: bun install --frozen-lockfile
 
+      - name: Add env variables
+        run: |
+          echo "API_URL=${{ secrets.API_URL }}" > .env
+
       - name: Build the project
         run: bun run build
 
       - name: Copy the code to the server
         run: |
+          cd dist
           rsync -avz --delete \
             -e "ssh" \
-            dist ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }}:${{ secrets.FOLDER }}
+            . ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }}:${{ secrets.FOLDER }}

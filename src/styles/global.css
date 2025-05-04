@@ -1,1 +1,28 @@
 @import "tailwindcss";
+
+@plugin "@tailwindcss/typography";
+
+@theme inline {
+  /* Spacing */
+  --spacing-section-w: 1320px;
+
+  /* Default values */
+  --default-transition-duration: 0.3s;
+}
+
+@layer base {
+  body {
+    -webkit-font-smoothing: antialiased !important;
+    text-rendering: optimizelegibility !important;
+  }
+
+  body * {
+    @apply scroll-smooth;
+  }
+
+  .main-container {
+    display: grid;
+    grid-template-rows: 1fr auto;
+    min-height: 100vh;
+  }
+}
