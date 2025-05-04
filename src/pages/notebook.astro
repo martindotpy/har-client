@@ -2,12 +2,17 @@
 import Section from "@/components/organisms/Section.astro";
 import { apiUrl } from "@/config";
 import Layout from "@/layout/Layout.astro";
+import { Code } from "astro-expressive-code/components";
 import { marked } from "marked";
 
+// Data
 const response = await fetch(`${apiUrl}/api/notebook/har_clustering.md`);
 
 const markdown = await response.text();
-const content = marked.parse(markdown);
+const tokens = marked.lexer(markdown);
+const contents = tokens.map((token) =>
+  token.type === "code" ? token : marked.parser([token]),
+);
 ---
 
 <Layout
@@ -15,6 +20,14 @@ const content = marked.parse(markdown);
   description="Notebook del modelo clustering de archivos HAR"
 >
   <Section class="prose prose-invert py-8">
-    <Fragment set:html={content} />
+    {
+      contents.map((content) =>
+        typeof content === "string" ? (
+          <Fragment set:html={content} />
+        ) : (
+          <Code code={content.text} lang={content.lang} />
+        ),
+      )
+    }
   </Section>
 </Layout>
