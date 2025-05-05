@@ -29,21 +29,21 @@ const openApiDoc = (await SwaggerParser.parse(
 )) as OpenAPIObject;
 
 // Create Zodios Client
-const result = await generateZodClientFromOpenAPI({
+await generateZodClientFromOpenAPI({
   openApiDoc,
   distPath: "src/api.ts",
   prettierConfig,
   handlebars: handlebars,
   options: {
-    groupStrategy: "tag",
-    shouldExportAllTypes: true,
-    shouldExportAllSchemas: true,
     baseUrl: apiUrl,
+    groupStrategy: "tag",
     withDocs: true,
     withAlias: true,
     withDescription: true,
+    shouldExportAllTypes: true,
+    shouldExportAllSchemas: true,
   },
   templatePath: "scripts/api.hbs",
 });
 
-console.log(result);
+console.log("Api generated successfully! ✅");
