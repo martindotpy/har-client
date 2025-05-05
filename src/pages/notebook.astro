@@ -1,21 +1,26 @@
 ---
-import { notebookApi } from "@/api";
 import Section from "@/components/organisms/Section.astro";
 import Layout from "@/layout/Layout.astro";
 import marked from "@/lib/marked";
+import { generateSlug } from "@/lib/slug";
+import { notebookMarkdownTokens } from "@/notebook-content";
 import { Code } from "astro-expressive-code/components";
 
 // Data
-const markdown = (await notebookApi.getNotebookFile({
-  params: {
-    file_path: "har_clustering.md",
-  },
-})) as string;
+const contents = notebookMarkdownTokens.map((token) => {
+  if (token.type === "code") return token;
 
-const tokens = marked.lexer(markdown);
-const contents = tokens.map((token) =>
-  token.type === "code" ? token : marked.parser([token]),
-);
+  const content = marked.parser([token]);
+
+  if (token.type !== "heading") return content;
+
+  const id = generateSlug(token.text);
+
+  return content.replace(
+    /<h(\d+)(.*?)>(.*?)<\/h\d+>/,
+    `<h$1$2 id="${id}">$3</h$1>`,
+  );
+});
 ---
 
 <Layout
