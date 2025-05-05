@@ -1,14 +1,17 @@
 ---
+import { notebookApi } from "@/api";
 import Section from "@/components/organisms/Section.astro";
-import { apiUrl } from "@/config";
 import Layout from "@/layout/Layout.astro";
 import marked from "@/lib/marked";
 import { Code } from "astro-expressive-code/components";
 
 // Data
-const response = await fetch(`${apiUrl}/api/notebook/har_clustering.md`);
+const markdown = (await notebookApi.getNotebookFile({
+  params: {
+    file_path: "har_clustering.md",
+  },
+})) as string;
 
-const markdown = await response.text();
 const tokens = marked.lexer(markdown);
 const contents = tokens.map((token) =>
   token.type === "code" ? token : marked.parser([token]),

@@ -2,10 +2,52 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "name": "HAR Client (Server) 🐞",
       "command": "./node_modules/.bin/astro dev --host",
-      "name": "Development server",
       "request": "launch",
-      "type": "node-terminal"
+      "type": "node-terminal",
+      "internalConsoleOptions": "neverOpen",
+      "presentation": {
+        "hidden": true
+      }
+    },
+    {
+      "name": "HAR Client (Client - MS Edge) 🐞",
+      "request": "launch",
+      "type": "msedge",
+      "url": "http://localhost:4321",
+      "webRoot": "${workspaceFolder}",
+      "presentation": {
+        "hidden": true
+      }
+    },
+    {
+      "name": "HAR Client (Client - Chrome) 🐞",
+      "request": "launch",
+      "type": "chrome",
+      "url": "http://localhost:4321",
+      "webRoot": "${workspaceFolder}",
+      "presentation": {
+        "hidden": true
+      }
+    }
+  ],
+  "compounds": [
+    {
+      "name": "HAR Client (Server + Client) 🐞 Windows",
+      "configurations": [
+        "HAR Client (Server) 🐞",
+        "HAR Client (Client - MS Edge) 🐞"
+      ],
+      "stopAll": true
+    },
+    {
+      "name": "HAR Client (Server + Client) 🐞 Linux/Mac",
+      "configurations": [
+        "HAR Client (Server) 🐞",
+        "HAR Client (Client - Chrome) 🐞"
+      ],
+      "stopAll": true
     }
   ]
 }
