@@ -27,16 +27,16 @@
     @apply scroll-smooth;
   }
 
-  *::-webkit-scrollbar {
+  body *::-webkit-scrollbar {
     @apply h-2 w-3;
   }
-  *::-webkit-scrollbar-track {
+  body *::-webkit-scrollbar-track {
     @apply rounded-full bg-slate-900;
   }
-  *::-webkit-scrollbar-thumb {
+  body *::-webkit-scrollbar-thumb {
     @apply rounded-full bg-slate-800;
   }
-  *::-webkit-scrollbar-thumb:hover {
+  body *::-webkit-scrollbar-thumb:hover {
     @apply bg-slate-600;
   }
 }
