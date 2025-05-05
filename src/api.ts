@@ -30,6 +30,7 @@ export const schemas = {
   HTTPValidationError,
 };
 
+// Apis
 const healthEndpoints = makeApi([
   {
     method: "get",
