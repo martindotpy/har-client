@@ -26,8 +26,8 @@ const tocContent = marked.parse(notebookMarkdownToc);
 
 // Styles
 const headerLinkClassname = cn(
-  "group relative flex h-full w-28 items-center justify-center text-center transition-colors data-[selected]:text-slate-400",
-  "after:absolute after:top-[75%] after:block after:h-1 after:w-0 after:bg-slate-400 after:transition-[width] after:content-[''] hover:text-slate-400 hover:after:w-full",
+  "group relative flex h-full w-28 items-center justify-center text-center transition-colors hover:text-slate-400 focus:text-slate-400 data-[selected]:text-slate-400",
+  "after:absolute after:top-[75%] after:block after:h-1 after:w-0 after:bg-slate-400 after:transition-[width] after:content-[''] hover:after:w-full focus:after:w-full",
 );
 ---
 
