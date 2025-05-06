@@ -57,7 +57,7 @@ const fullTitle = `Har Clustering${title ? `: ${title}` : ""}`;
     <ClientRouter />
   </head>
   <body class="overflow-y-scroll">
-    <Header />
+    <Header transition:persist="header" />
 
     <main class="min-h-main-h mt-header-h overflow-x-hidden">
       <slot />
