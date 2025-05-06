@@ -39,7 +39,7 @@ const headerLinkClassname = cn(
     <nav class="flex h-full items-center justify-center gap-1">
       <a class={headerLinkClassname} href="/"> Modelo </a>
 
-      <a class={headerLinkClassname} href="/notebook/"> Notebook </a>
+      <a class={headerLinkClassname} href="/notebook"> Notebook </a>
     </nav>
   </header>
 </div>
@@ -48,7 +48,7 @@ const headerLinkClassname = cn(
   function removeSlash(path: string | null) {
     if (!path) return path;
 
-    return path.endsWith("/") ? path.slice(1) : path;
+    return path.endsWith("/") ? path.slice(0, -1) : path;
   }
 
   function updateSelectedLink() {
