@@ -1,5 +1,6 @@
 // @ts-check
 import react from "@astrojs/react";
+import sitemap from "@astrojs/sitemap";
 import { pluginFramesTexts } from "@expressive-code/plugin-frames";
 import tailwindcss from "@tailwindcss/vite";
 import expressiveCode from "astro-expressive-code";
@@ -12,7 +13,7 @@ pluginFramesTexts.overrideTexts("es", {
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://har.vluepixel.com",
+  site: "https://har.martindotpy.dev",
 
   i18n: {
     defaultLocale: "es",
@@ -20,7 +21,6 @@ export default defineConfig({
   },
 
   integrations: [
-    react(),
     expressiveCode({
       themes: ["tokyo-night"],
       styleOverrides: {
@@ -29,6 +29,16 @@ export default defineConfig({
       },
       defaultLocale: "es",
     }),
+    sitemap({
+      changefreq: "monthly",
+      priority: 0.8,
+      serialize(item) {
+        if (item.url === "https://har.martindotpy.dev/") item.priority = 1;
+
+        return item;
+      },
+    }),
+    react(),
   ],
 
   vite: {
