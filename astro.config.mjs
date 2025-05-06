@@ -5,6 +5,7 @@ import { pluginFramesTexts } from "@expressive-code/plugin-frames";
 import tailwindcss from "@tailwindcss/vite";
 import expressiveCode from "astro-expressive-code";
 import { defineConfig } from "astro/config";
+import babelPluginReactCompiler from "babel-plugin-react-compiler";
 
 pluginFramesTexts.overrideTexts("es", {
   copyButtonTooltip: "Copiar",
@@ -38,7 +39,11 @@ export default defineConfig({
         return item;
       },
     }),
-    react(),
+    react({
+      babel: {
+        plugins: [babelPluginReactCompiler],
+      },
+    }),
   ],
 
   vite: {
