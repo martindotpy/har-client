@@ -1,69 +1,52 @@
 ---
-import { sectionClasses } from "@/components/organisms/styles/_section-styles";
-import { generateSlug } from "@/lib/slug";
+import { sectionClasses } from "@/components/organisms/styles/section-styles";
+import marked from "@/lib/marked";
+import { removeSlash } from "@/lib/path";
 import { cn } from "@/lib/tailwind-class";
-import { notebookMarkdownTokens } from "@/notebook-content";
-import { type Tokens, marked } from "marked";
+import { notebookToc } from "@/notebook-content";
+
+// Context
+const currentPath = removeSlash(Astro.url.pathname);
 
 // Data
-const notebookMarkdownToc = notebookMarkdownTokens
-  .filter(
-    (token): token is Tokens.Heading =>
-      token.type === "heading" && token.depth >= 2,
-  )
-  .map((token) => ({
-    label: token.text,
-    href: `/notebook#${generateSlug(token.text)}`,
-    depth: token.depth,
-  }))
-  .reduce((acc, { label, href, depth }) => {
+const notebookMarkdownToc = notebookToc.reduce(
+  (acc, { label, href, depth }) => {
     const indent = "  ".repeat(depth - 2);
     return acc + `${indent}- [${label}](${href})\n`;
-  }, "");
+  },
+  "",
+);
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const tocContent = marked.parse(notebookMarkdownToc);
 
 // Styles
 const headerLinkClassname = cn(
-  "group relative flex h-full w-28 items-center justify-center text-center transition-colors hover:text-slate-400 focus:text-slate-400 data-[selected]:text-slate-400",
-  "after:absolute after:top-[75%] after:block after:h-1 after:w-0 after:bg-slate-400 after:transition-[width] after:content-[''] hover:after:w-full",
+  "group relative flex h-full w-28 items-center justify-center text-center transition-colors hover:text-slate-400 focus:text-slate-400 data-[selected=true]:text-slate-400",
+  "after:absolute after:top-[75%] after:block after:h-1 after:w-0 after:bg-slate-400 after:transition-[width] after:content-[''] data-[selected=false]:hover:after:w-full",
 );
 ---
 
 <div
   class="h-header-h fixed top-0 left-0 z-50 w-full bg-slate-900/75 backdrop-blur-lg"
-  transition:persist="header"
 >
   <header class:list={[sectionClasses, "h-full"]}>
     <nav class="flex h-full items-center justify-center gap-1">
-      <a class={headerLinkClassname} href="/"> Modelo </a>
+      <a
+        class={headerLinkClassname}
+        href="/"
+        data-selected={currentPath === "/"}
+      >
+        Modelo
+      </a>
 
-      <a class={headerLinkClassname} href="/notebook"> Notebook </a>
+      <a
+        class={headerLinkClassname}
+        href="/notebook"
+        data-selected={currentPath === "/notebook"}
+      >
+        Notebook
+      </a>
     </nav>
   </header>
 </div>
-
-<script>
-  function removeSlash(path: string | null) {
-    if (!path) return path;
-
-    return path.endsWith("/") ? path.slice(0, -1) : path;
-  }
-
-  function updateSelectedLink() {
-    const headerLinks = document.querySelectorAll("nav a");
-    const currentPath = removeSlash(window.location.pathname);
-
-    headerLinks.forEach((link) => {
-      if (removeSlash(link.getAttribute("href")) === currentPath) {
-        link.setAttribute("data-selected", "true");
-      } else {
-        link.removeAttribute("data-selected");
-      }
-    });
-  }
-
-  document.addEventListener("DOMContentLoaded", updateSelectedLink);
-  document.addEventListener("astro:after-swap", updateSelectedLink);
-</script>
