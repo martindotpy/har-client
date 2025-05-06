@@ -33,12 +33,13 @@ const headerLinkClassname = cn(
 
 <div
   class="h-header-h fixed top-0 left-0 z-50 w-full bg-slate-900/75 backdrop-blur-lg"
+  transition:persist="header"
 >
   <header class:list={[sectionClasses, "h-full"]}>
     <nav class="flex h-full items-center justify-center gap-1">
       <a class={headerLinkClassname} href="/"> Modelo </a>
 
-      <a class={headerLinkClassname} href="/notebook"> Notebook </a>
+      <a class={headerLinkClassname} href="/notebook/"> Notebook </a>
     </nav>
   </header>
 </div>
