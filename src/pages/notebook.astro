@@ -10,7 +10,7 @@ import { Code } from "astro-expressive-code/components";
 const contents = notebookMarkdownTokens.map((token) => {
   if (token.type === "code") return token;
 
-  const content = marked.parser([token]);
+  const content = marked.parser([token]).replaceAll("http://", "https://");
 
   if (token.type !== "heading") return content;
 
