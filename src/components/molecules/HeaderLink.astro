@@ -1,0 +1,69 @@
+---
+import { removeSlash } from "@/lib/path";
+import { cn } from "@/lib/tailwind-class";
+import type { HTMLAttributes } from "astro/types";
+
+// Context
+interface Props extends HTMLAttributes<"div"> {
+  href: string;
+  content?: string;
+}
+
+const {
+  class: className,
+  "class:list": classList,
+  content,
+  href: rawHref,
+  ...props
+} = Astro.props;
+const currentPath = removeSlash(Astro.url.pathname);
+const href = removeSlash(rawHref);
+
+// Styles
+const headerLinkClassname = cn(
+  "group relative flex h-full w-28 items-center justify-center text-center transition-colors hover:text-slate-400 focus:text-slate-400 data-[selected=true]:text-slate-400",
+  "after:absolute after:top-[75%] after:block after:h-1 after:w-0 after:bg-slate-400 after:transition-[width] after:content-[''] data-[selected=false]:hover:after:w-full data-[selected=false]:focus:after:w-full",
+);
+---
+
+<div
+  class={cn(headerLinkClassname, className, classList)}
+  {...props}
+  data-selected={currentPath === href}
+  onmouseenter="this.querySelector('.tooltip')?.classList.add('open');"
+  onmouseleave="this.querySelector('.tooltip')?.classList.remove('open');"
+>
+  <a href={rawHref}>
+    <slot />
+  </a>
+  {
+    content && (
+      <div
+        class="prose prose-invert prose-a:font-medium prose-a:no-underline tooltip absolute top-10/12 w-[300%] rounded bg-slate-900 p-2 text-left text-xs text-slate-50"
+        aria-hidden="false"
+        set:html={content}
+      />
+    )
+  }
+</div>
+
+<style>
+  .tooltip {
+    display: none;
+    opacity: 0;
+    transition:
+      opacity 0.3s ease,
+      display 0.3s ease allow-discrete;
+
+    &.open {
+      opacity: 1;
+      display: block;
+    }
+  }
+
+  @starting-style {
+    .tooltip.open {
+      opacity: 0;
+    }
+  }
+</style>
