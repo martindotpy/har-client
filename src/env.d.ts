@@ -1,3 +1,3 @@
 interface ImportMetaEnv {
-  API_URL: string;
+  PUBLIC_API_URL: string;
 }

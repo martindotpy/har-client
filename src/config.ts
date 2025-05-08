@@ -1,1 +1,1 @@
-export const { SITE: site, API_URL: apiUrl } = import.meta.env;
+export const { SITE: site, PUBLIC_API_URL: apiUrl } = import.meta.env;
