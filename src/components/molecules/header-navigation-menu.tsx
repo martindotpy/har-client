@@ -48,7 +48,7 @@ export function HeaderNavigationMenu({
                 }}
               >
                 <div
-                  className="prose prose-a:no-underline prose-sm dark:prose-invert max-h-[calc(var(--spacing-main-h)_-_var(--spacing)_*_24)] w-80 overflow-y-auto md:w-132"
+                  className="prose prose-ul:list-none prose-ul:ps-2 prose-a:no-underline prose-sm dark:prose-invert max-h-[calc(var(--spacing-main-h)_-_var(--spacing)_*_24)] w-80 overflow-y-auto md:w-132"
                   dangerouslySetInnerHTML={{ __html: headerLink.content }}
                 ></div>
               </NavigationMenuContent>
