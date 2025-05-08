@@ -42,7 +42,7 @@ jobs:
 
       - name: Add env variables
         run: |
-          echo "API_URL=${{ secrets.API_URL }}" > .env
+          echo "PUBLIC_API_URL=${{ secrets.PUBLIC_API_URL }}" > .env
 
       - name: Build the project
         run: bun run build
