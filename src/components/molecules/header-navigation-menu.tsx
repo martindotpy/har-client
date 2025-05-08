@@ -40,6 +40,12 @@ export function HeaderNavigationMenu({
               <NavigationMenuContent
                 forceMount
                 className="data-[state=closed]:hidden"
+                onClick={(event) => {
+                  (event.currentTarget as HTMLElement).setAttribute(
+                    "data-state",
+                    "closed",
+                  );
+                }}
               >
                 <div
                   className="prose prose-a:no-underline prose-sm dark:prose-invert max-h-[calc(var(--spacing-main-h)_-_var(--spacing)_*_24)] w-80 overflow-y-auto md:w-132"
