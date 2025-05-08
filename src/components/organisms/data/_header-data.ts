@@ -1,3 +1,4 @@
+import type { HeaderLink } from "@/components/organisms/types/header-types";
 import { notebookToc } from "@/notebook-content";
 import { marked } from "marked";
 
@@ -10,17 +11,6 @@ const notebookMarkdownToc = notebookToc.reduce(
 );
 
 const tocContent = await marked.parse(notebookMarkdownToc);
-
-interface HeaderLink {
-  title: string;
-  href: string;
-  /**
-   * Este contenido se mostrará en el tooltip al pasar el mouse sobre el link.
-   *
-   * Deberá ser un string en formato HTML.
-   */
-  content?: string;
-}
 
 export const headerLinks: HeaderLink[] = [
   {
