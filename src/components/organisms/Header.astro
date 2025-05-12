@@ -2,6 +2,9 @@
 import { HeaderNavigationMenu } from "@/components/molecules/header-navigation-menu";
 import { headerLinks } from "@/components/organisms/data/_header-data";
 import { sectionClasses } from "@/components/organisms/styles/section-styles";
+
+// Context
+const url = Astro.url.pathname;
 ---
 
 <div
@@ -9,6 +12,6 @@ import { sectionClasses } from "@/components/organisms/styles/section-styles";
   transition:persist="header"
 >
   <header class:list={[sectionClasses, "flex h-full justify-center"]}>
-    <HeaderNavigationMenu headerLinks={headerLinks} client:load />
+    <HeaderNavigationMenu url={url} headerLinks={headerLinks} client:load />
   </header>
 </div>

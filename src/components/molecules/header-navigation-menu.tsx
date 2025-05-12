@@ -7,14 +7,32 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
+import { useEffect, useState } from "react";
 
 interface HeaderNavigationMenuProps {
   headerLinks: HeaderLink[];
+  url: string;
 }
 
 export function HeaderNavigationMenu({
   headerLinks,
+  url,
 }: HeaderNavigationMenuProps) {
+  // Url
+  const [currentUrl, setCurrentUrl] = useState(url);
+
+  useEffect(() => {
+    function handleUrlChange() {
+      const newUrl = window.location.pathname;
+      setCurrentUrl(newUrl);
+    }
+
+    document.addEventListener("astro:after-swap", handleUrlChange);
+
+    return () =>
+      document.removeEventListener("astro:after-swap", handleUrlChange);
+  }, []);
+
   return (
     <NavigationMenu className="flex items-center justify-center gap-1">
       <NavigationMenuList className="h-full">
@@ -22,7 +40,10 @@ export function HeaderNavigationMenu({
           if (!headerLink.content)
             return (
               <NavigationMenuItem key={headerLink.href}>
-                <NavigationMenuLink href={headerLink.href}>
+                <NavigationMenuLink
+                  href={headerLink.href}
+                  data-active={headerLink.href === currentUrl}
+                >
                   {headerLink.title}
                 </NavigationMenuLink>
               </NavigationMenuItem>
@@ -33,7 +54,10 @@ export function HeaderNavigationMenu({
               key={headerLink.href}
               className="flex items-center"
             >
-              <NavigationMenuLink href={headerLink.href}>
+              <NavigationMenuLink
+                href={headerLink.href}
+                data-active={headerLink.href === currentUrl}
+              >
                 {headerLink.title}
               </NavigationMenuLink>
               <NavigationMenuTrigger className="bg-transparent px-2" />
