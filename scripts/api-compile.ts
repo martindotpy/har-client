@@ -10,7 +10,7 @@ import { resolveConfig } from "prettier";
 // Env
 configDotenv();
 
-const { API_URL: apiUrl } = import.meta.env;
+const { PUBLIC_API_URL: apiUrl } = import.meta.env;
 
 // Configs
 const prettierConfig = await resolveConfig("./");

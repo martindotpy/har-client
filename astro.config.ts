@@ -1,4 +1,3 @@
-// @ts-check
 import react from "@astrojs/react";
 import sitemap from "@astrojs/sitemap";
 import { pluginFramesTexts } from "@expressive-code/plugin-frames";
@@ -6,15 +5,13 @@ import tailwindcss from "@tailwindcss/vite";
 import expressiveCode from "astro-expressive-code";
 import { defineConfig, fontProviders } from "astro/config";
 import babelPluginReactCompiler from "babel-plugin-react-compiler";
+import { site } from "./src/config";
 
 // Marked
 pluginFramesTexts.overrideTexts("es", {
   copyButtonTooltip: "Copiar",
   copyButtonCopied: "¡Copiado!",
 });
-
-// Site
-const site = "https://har.martindotpy.dev";
 
 // https://astro.build/config
 export default defineConfig({
