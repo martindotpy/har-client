@@ -46,14 +46,7 @@ export default defineConfig({
         plugins: [babelPluginReactCompiler],
       },
     }),
-    compress({
-      HTML: {
-        "html-minifier-terser": {
-          removeAttributeQuotes: false,
-          ignoreCustomComments: [],
-        },
-      },
-    }),
+    compress({ HTML: false }),
   ],
 
   experimental: {
