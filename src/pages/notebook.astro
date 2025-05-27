@@ -1,10 +1,13 @@
 ---
 import Section from "@/components/organisms/Section.astro";
 import Layout from "@/layout/Layout.astro";
+import { parseAttributes } from "@/lib/html";
 import marked from "@/lib/marked";
 import { generateSlug } from "@/lib/slug";
 import { notebookMarkdownTokens } from "@/notebook-content";
 import { Code } from "astro-expressive-code/components";
+import { experimental_AstroContainer } from "astro/container";
+import { Image } from "astro:assets";
 
 // Data
 const contents = notebookMarkdownTokens.map((token) => {
@@ -31,13 +34,31 @@ const contents = notebookMarkdownTokens.map((token) => {
     class="prose prose-invert prose-img:mx-auto prose-headings:scroll-mt-[calc(var(--spacing-header-h)_+_var(--spacing)_*_4)] py-8"
   >
     {
-      contents.map((content) =>
-        typeof content === "string" ? (
-          <Fragment set:html={content} />
-        ) : (
-          <Code class="my-2" code={content.text} lang={content.lang} />
-        ),
-      )
+      contents.map(async (content) => {
+        if (typeof content !== "string")
+          return <Code class="my-2" code={content.text} lang={content.lang} />;
+
+        // Extract image to optimize rendering
+        if (content.includes("<img")) {
+          const imgTag = content.match(/<img[^>]+>/)![0];
+          const attributes = parseAttributes(imgTag);
+
+          // Render to string
+          const container = await experimental_AstroContainer.create();
+          const image = await container.renderToString(Image, {
+            props: {
+              src: attributes.src,
+              alt: attributes.alt,
+              inferSize: true,
+              ...attributes,
+            },
+          });
+
+          content = content.replace(imgTag, image);
+        }
+
+        return <Fragment set:html={content} />;
+      })
     }
   </Section>
 </Layout>
