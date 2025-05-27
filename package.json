@@ -22,6 +22,7 @@
     "@types/react-dom": "19.1.5",
     "@zodios/core": "10.9.6",
     "astro": "5.8.0",
+    "astro-compress": "2.3.8",
     "astro-expressive-code": "0.41.2",
     "class-variance-authority": "0.7.1",
     "clsx": "2.1.1",

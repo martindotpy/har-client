@@ -2,6 +2,7 @@ import react from "@astrojs/react";
 import sitemap from "@astrojs/sitemap";
 import { pluginFramesTexts } from "@expressive-code/plugin-frames";
 import tailwindcss from "@tailwindcss/vite";
+import compress from "astro-compress";
 import expressiveCode from "astro-expressive-code";
 import { defineConfig, fontProviders } from "astro/config";
 import babelPluginReactCompiler from "babel-plugin-react-compiler";
@@ -43,6 +44,14 @@ export default defineConfig({
     react({
       babel: {
         plugins: [babelPluginReactCompiler],
+      },
+    }),
+    compress({
+      HTML: {
+        "html-minifier-terser": {
+          removeAttributeQuotes: false,
+          ignoreCustomComments: [],
+        },
       },
     }),
   ],
