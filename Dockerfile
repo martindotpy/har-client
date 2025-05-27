@@ -1,14 +1,15 @@
-FROM oven/bun:1.2.14@sha256:5a4b539bfd3d93bb61e7c18321e0d8726eee930ef8076ffd06930ac7baa24c15 AS builder
+FROM node:24-alpine@sha256:dfea0736e82fef246aba86b2082a5e86c4825470302692b841d097dd61253b79 AS builder
 
 WORKDIR /app
 
-COPY package.json bun.lock ./
-RUN bun install --frozen-lockfile
+COPY package.json ./
+
+RUN npm install
 
 COPY . .
 
-RUN bun astro telemetry disable
-RUN bun run build
+RUN npm run astro telemetry disable
+RUN npm run build
 
 
 FROM nginx:alpine3.21-slim@sha256:b947b2630c97622793113555e13332eec85bdc7a0ac6ab697159af78942bb856 AS runtime

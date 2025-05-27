@@ -67,6 +67,8 @@ export default defineConfig({
   },
 
   vite: {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
     plugins: [tailwindcss()],
   },
 });

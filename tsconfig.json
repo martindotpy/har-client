@@ -36,8 +36,8 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"],
-      "@assets/*": ["./src/assets/*"],
-      "@styles": ["./src/styles/global.css"]
+      "@styles": ["./src/styles/global.css"],
+      "@assets/*": ["./src/assets/*"]
     }
   }
 }
