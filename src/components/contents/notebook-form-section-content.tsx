@@ -106,37 +106,37 @@ export default function NotebookFormSectionContent() {
           <HarNumberFormField
             form={form}
             name="back_x"
-            label="Back X"
+            label="Espalda X"
             description="Introduce el valor de la aceleración en el eje X de la espalda."
           />
           <HarNumberFormField
             form={form}
             name="back_y"
-            label="Back Y"
+            label="Espalda Y"
             description="Introduce el valor de la aceleración en el eje Y de la espalda."
           />
           <HarNumberFormField
             form={form}
             name="back_z"
-            label="Back Z"
+            label="Espalda Z"
             description="Introduce el valor de la aceleración en el eje Z de la espalda."
           />
           <HarNumberFormField
             form={form}
             name="thigh_x"
-            label="Thigh X"
+            label="Muslo X"
             description="Introduce el valor de la aceleración en el eje X del muslo."
           />
           <HarNumberFormField
             form={form}
             name="thigh_y"
-            label="Thigh Y"
+            label="Muslo Y"
             description="Introduce el valor de la aceleración en el eje Y del muslo."
           />
           <HarNumberFormField
             form={form}
             name="thigh_z"
-            label="Thigh Z"
+            label="Muslo Z"
             description="Introduce el valor de la aceleración en el eje Z del muslo."
           />
 
