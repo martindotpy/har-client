@@ -12,7 +12,7 @@ interface Props {
 }
 
 const { title, description } = Astro.props;
-const fullTitle = `Har Clustering${title ? `: ${title}` : ""}`;
+const fullTitle = `${title ? `${title} - ` : ""}Har Clustering`;
 ---
 
 <!doctype html>
@@ -28,8 +28,14 @@ const fullTitle = `Har Clustering${title ? `: ${title}` : ""}`;
     <meta name="robots" content="index, follow" />
 
     <meta name="author" content="Andrea, Ángel y Martin" />
-    <meta name="keywords" content="har" />
+    <meta
+      name="keywords"
+      content="har,clustering,reconocimiento de actividad humana"
+    />
     <meta name="description" content={description} />
+
+    <link rel="canonical" href={site} />
+    <link rel="alternate" hreflang="es" href={site} />
 
     <meta property="og:site_name" content={fullTitle} />
     <meta property="og:url" content={site} />
@@ -38,7 +44,10 @@ const fullTitle = `Har Clustering${title ? `: ${title}` : ""}`;
     <meta property="og:locale" content="es" />
     <meta property="og:description" content={description} />
     <slot name="og:image">
-      <meta property="og:image" content="/img/logo-open-graph.jpg" />
+      <meta property="og:image" content="/og.png" />
+      <meta property="og:image:alt" content="HAR" />
+      <meta property="og:image:width" content="1200" />
+      <meta property="og:image:height" content="630" />
     </slot>
 
     <meta property="twitter:card" content="summary_large_image" />
@@ -47,13 +56,25 @@ const fullTitle = `Har Clustering${title ? `: ${title}` : ""}`;
     <meta property="twitter:title" content={fullTitle} />
     <meta property="twitter:description" content={description} />
     <slot name="twitter:image">
-      <meta property="twitter:image" content="/img/logo-open-graph.jpg" />
+      <meta name="twitter:image" content=`${site}/og.png` />
+      <meta name="twitter:image:alt" content="HAR" />
+      <meta name="twitter:image:width" content="1200" />
+      <meta name="twitter:image:height" content="630" />
     </slot>
+
+    <meta name="theme-color" content="#1e3a8a" />
+
+    <meta name="msapplication-TileColor" content="#1e3a8a" />
+    <meta name="msapplication-TileImage" content="/mstile-150x150.png" />
+
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 
     <slot name="head" />
 
+    {/* Styles */}
     <GlobalStyles />
 
+    {/* Scripts */}
     <ClientRouter />
   </head>
   <body class="overflow-y-scroll">
