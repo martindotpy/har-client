@@ -1,10 +1,10 @@
 ---
-import Section from "@/components/organisms/Section.astro";
+import NotebookFormSectionContent from "@/components/contents/notebook-form-section-content";
 import Layout from "@/layout/Layout.astro";
 ---
 
-<Layout description="Modelo de clustering de archivos HAR">
-  <Section class="py-8">
-    <h1>Aquí irá el servicio usando el modelo creado</h1>
-  </Section>
+<Layout
+  description="Modelo de clustering de reconocimiento de actividad humana (HAR)."
+>
+  <NotebookFormSectionContent client:load />
 </Layout>
