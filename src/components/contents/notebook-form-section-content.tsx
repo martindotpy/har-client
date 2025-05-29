@@ -87,7 +87,7 @@ export default function NotebookFormSectionContent() {
   }
 
   return (
-    <section className={cn(sectionClassname, "pt-4", "md:pt-8")}>
+    <section className={cn(sectionClassname, "py-8")}>
       <h1 className="text-center text-3xl font-bold">
         ¡Reconoce tu actividad humana!
       </h1>

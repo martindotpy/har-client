@@ -22,10 +22,10 @@ export default function HarTypeDisplay() {
   const harType = useHarPredictionStore((state) => state.prediction);
 
   // Styles
-  const textClassname = cn("text-7xl font-bold");
+  const textClassname = cn("text-4xl font-bold", "md:text-7xl");
 
   return (
-    <div className={cn("flex justify-center py-2", "md:py-4", "lg:py-12")}>
+    <div className={cn("flex justify-center py-4", "md:py-12")}>
       <DecryptedText
         text={harType ? types[harType] : "Descúbrelo..."}
         className={textClassname}
