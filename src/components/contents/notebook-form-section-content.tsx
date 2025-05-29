@@ -1,6 +1,6 @@
 import { harApi, schemas, type HarRequest } from "@/api";
 import HarTypeDisplay from "@/components/molecules/har-type-display";
-import { sectionClasses as sectionClassname } from "@/components/organisms/styles/section-styles";
+import { sectionClassname } from "@/components/organisms/styles/section-styles";
 import { Button } from "@/components/ui/button";
 import ButtonLoader from "@/components/ui/button-loader";
 import {

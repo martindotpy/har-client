@@ -1,0 +1,21 @@
+---
+import { sectionClassname } from "@/components/organisms/styles/section-styles";
+import { buttonVariants } from "@/components/ui/button";
+import Layout from "@/layout/Layout.astro";
+import { cn } from "@/lib/tailwind-class";
+---
+
+<Layout title="404" description="Página no encontrada">
+  <section
+    class={cn(
+      sectionClassname,
+      "flex flex-col items-center justify-center py-16 text-center",
+    )}
+  >
+    <h1 class="mb-4 text-6xl font-bold">404</h1>
+    <p class="mb-8 text-xl">Página no encontrada</p>
+    <a href="/" class={cn(buttonVariants({ variant: "link" }))}>
+      Volver al inicio
+    </a>
+  </section>
+</Layout>
