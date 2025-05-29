@@ -56,12 +56,12 @@ const HTTPValidationError: z.ZodType<HTTPValidationError> = z
 
 const HarRequest = z
   .object({
-    back_x: z.number().gt(-30).lt(30).describe("Back X acceleration"),
-    back_y: z.number().gt(-30).lt(30).describe("Back Y acceleration"),
-    back_z: z.number().gt(-30).lt(30).describe("Back Z acceleration"),
-    thigh_x: z.number().gt(-30).lt(30).describe("Thigh X acceleration"),
-    thigh_y: z.number().gt(-30).lt(30).describe("Thigh Y acceleration"),
-    thigh_z: z.number().gt(-30).lt(30).describe("Thigh Z acceleration"),
+    back_x: z.number().gte(-30).lte(30).describe("Back X acceleration"),
+    back_y: z.number().gte(-30).lte(30).describe("Back Y acceleration"),
+    back_z: z.number().gte(-30).lte(30).describe("Back Z acceleration"),
+    thigh_x: z.number().gte(-30).lte(30).describe("Thigh X acceleration"),
+    thigh_y: z.number().gte(-30).lte(30).describe("Thigh Y acceleration"),
+    thigh_z: z.number().gte(-30).lte(30).describe("Thigh Z acceleration"),
   })
   .strict();
 export type HarRequest = z.infer<typeof HarRequest>;
