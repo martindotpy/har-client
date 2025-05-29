@@ -1,5 +1,6 @@
 import SwaggerParser from "@apidevtools/swagger-parser";
 import { configDotenv } from "dotenv";
+import { readFileSync, writeFileSync } from "fs";
 import {
   generateZodClientFromOpenAPI,
   getHandlebars,
@@ -13,6 +14,7 @@ configDotenv();
 const { PUBLIC_API_URL: apiUrl } = import.meta.env;
 
 // Configs
+const distPath = "src/api.ts";
 const prettierConfig = await resolveConfig("./");
 
 const handlebars = getHandlebars();
@@ -41,7 +43,7 @@ const openApiDoc = (await SwaggerParser.parse(
 // Create Zodios Client
 await generateZodClientFromOpenAPI({
   openApiDoc,
-  distPath: "src/api.ts",
+  distPath,
   prettierConfig,
   handlebars: handlebars,
   options: {
@@ -55,5 +57,14 @@ await generateZodClientFromOpenAPI({
   },
   templatePath: "scripts/api.hbs",
 });
+
+// Read all the content as string
+const apiContent = readFileSync(distPath, "utf-8");
+
+// Remove all the passthroughs
+const updatedApiContent = apiContent.replaceAll("passthrough()", "strict()");
+
+// Write the updated content back to the file
+writeFileSync(distPath, updatedApiContent, "utf-8");
 
 console.log("Api generated successfully! ✅");
