@@ -18,6 +18,7 @@ import { useHarPredictionStore } from "@/store/har-prediction-store";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, type UseFormReturn } from "react-hook-form";
 
+// Har number form field
 interface HarNumberFormFieldProps {
   form: UseFormReturn<HarRequest>;
   name: keyof HarRequest;
@@ -58,6 +59,7 @@ function HarNumberFormField({
   );
 }
 
+// Section content
 export default function NotebookFormSectionContent() {
   // Har prediction
   const setPrediction = useHarPredictionStore((state) => state.setPrediction);
@@ -81,6 +83,8 @@ export default function NotebookFormSectionContent() {
       const response = await harApi.postPredictHar(data);
 
       setPrediction(response.type);
+
+      window.scrollTo({ top: 0, behavior: "smooth" });
     } catch (error) {
       console.error("Error submitting form:", error);
     }
