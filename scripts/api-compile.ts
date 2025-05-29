@@ -22,6 +22,16 @@ handlebars.registerHelper("camelCase", function (str: string) {
     .replace(/([-_]\w)/g, (match) => match[1]!.toUpperCase())
     .replace(/^\w/, (match) => match.toLowerCase());
 });
+handlebars.registerHelper(
+  "notEmitted",
+  (schema: string, types: Record<string, boolean>) => {
+    if (schema in types) {
+      return false;
+    }
+
+    return true;
+  },
+);
 
 // Open API
 const openApiDoc = (await SwaggerParser.parse(
